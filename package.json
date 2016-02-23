@@ -1,0 +1,53 @@
+{
+  "name": "wiser",
+  "version": "1.0.0",
+  "description": "wiser",
+  "scripts": {
+    "test": "mocha --require babel-core/register src/tests/specs.js",
+    "build": "webpack --config webpack.build.js --bail",
+    "dev": "webpack-dev-server --history-api-fallback --progress --hot --inline"
+  },
+  "repository": "",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.4.9",
+    "angular-google-maps": "^2.3.0",
+    "angular-simple-logger": "^0.1.7",
+    "angular-ui-router": "^0.2.15",
+    "autoprefixer-core": "^5.2.0",
+    "babel-core": "^5.5.8",
+    "babel-loader": "^5.1.4",
+    "babel-runtime": "^5.5.8",
+    "body-parser": "^1.14.2",
+    "bootstrap": "^3.3.6",
+    "chance.js": "0.0.1",
+    "compress": "^0.99.0",
+    "cookie-parser": "^1.4.1",
+    "css-loader": "^0.14.5",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "extract-text-webpack-plugin": "^0.8.2",
+    "file-loader": "^0.8.4",
+    "html-webpack-plugin": "^1.5.2",
+    "json-loader": "^0.5.4",
+    "less": "^2.5.3",
+    "less-loader": "^2.2.2",
+    "lodash": "^3.10.1",
+    "method-override": "^2.3.5",
+    "morgan": "^1.6.1",
+    "ng-annotate-loader": "^0.1.0",
+    "node-libs-browser": "^0.5.2",
+    "postcss-loader": "^0.4.4",
+    "raw-loader": "^0.5.1",
+    "serve-favicon": "^2.3.0",
+    "style-loader": "^0.12.3",
+    "webpack": "^1.9.11",
+    "webpack-dev-server": "^1.9.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.5.0",
+    "expect.js": "^0.3.1",
+    "mocha": "^2.4.5"
+  }
+}

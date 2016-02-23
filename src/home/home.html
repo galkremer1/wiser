@@ -1,0 +1,135 @@
+
+
+<div class="text-center">
+    <img src="wiserlogo.jpg">
+    <h1>Wiser Price Comparison</h1>
+    <span>Select a category to filter by:</span>
+    <select ng-model="home.selectedCategory">
+        <option selected value="">All categories</option>
+        <option
+            ng-repeat="category in home.categories"
+            value="{{ category }}">{{ category }}</option>
+    </select>
+    <h4>* Double click an item to edit it</h4>
+    <hr/>
+    <div class="edit" ng-show="home.editing">
+        Choose a field to edit. Hit 'Enter' or click outside the box when you are done.
+    </div>
+</div>
+
+
+<div>
+
+    <div class="items-table" align="center">
+
+        <table class="table table-hovered table-bordered items-table header-fixed">
+            <thead>
+                <tr>
+                    <th
+                    ng-click="home.sortTableBy('name')"
+                        ng-class="{ 'sort': home.sortKey === 'name'}">Name
+                        <div ng-class="{'arrow-up' : home.sortDirection === -1, 'arrow-down' : home.sortDirection === 1}"></div></th>
+                    <th
+                        ng-click="home.sortTableBy('sku')"
+                        ng-class="{ 'sort': home.sortKey === 'sku'}">SKU
+                        <div ng-class="{'arrow-up' : home.sortDirection === -1, 'arrow-down' : home.sortDirection === 1}"></div></th>
+                    </th>
+                    <th
+                        ng-click="home.sortTableBy('price')"
+                        ng-class="{ 'sort': home.sortKey === 'price'}">Price
+                        <div ng-class="{'arrow-up' : home.sortDirection === -1, 'arrow-down' : home.sortDirection === 1}"></div></th>
+                    </th>
+                    <th
+                        ng-click="home.sortTableBy('category')"
+                        ng-class="{ 'sort': home.sortKey === 'category'}">Category
+                        <div ng-class="{'arrow-up' : home.sortDirection === -1, 'arrow-down' : home.sortDirection === 1}"></div></th>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    ng-repeat="item in home.items |
+                    filter: { category: home.selectedCategory } |
+                    startFrom:(home.currentPage-1)*home.pageSize |
+                    limitTo:home.pageSize">
+                    <td ng-dblclick="home.editItem(item, home.sortKey)" ng-blur="home.doneEditing(item)">
+                        <span ng-hide="item.editing">{{ item.name }}</span>
+                        <span ng-show="item.editing">
+                            <input ng-model="item.name" ng-blur="home.doneEditing(item)" ng-enter="home.doneEditing(item)"/>
+                        </span>
+                    </td>
+                    <td ng-dblclick="home.editItem(item)" ng-blur="home.doneEditing(item)">
+                        <span ng-hide="item.editing">{{ item.sku }}</span>
+                        <span ng-show="item.editing">
+                            <input ng-model="item.sku" ng-blur="home.doneEditing(item)" ng-enter="home.doneEditing(item)" type="number"/>
+                        </span>
+                    </td>
+                    <td ng-dblclick="home.editItem(item)" ng-blur="home.doneEditing(item)">
+                        <span ng-hide="item.editing">{{ item.price | currency }}</span>
+                        <span ng-show="item.editing">
+                            <input ng-model="item.price" ng-blur="home.doneEditing(item)" ng-enter="home.doneEditing(item)" type="number"/>
+                        </span>
+                    </td>
+                    <td ng-dblclick="home.editItem(item)" ng-blur="home.doneEditing(item)">
+                        <span ng-hide="item.editing">{{ item.category }}</span>
+                        <span ng-show="item.editing">
+                            <select ng-model="item.category" ng-blur="home.doneEditing(item)" ng-enter="home.doneEditing(item)">
+                                <option
+                                    ng-repeat="category in home.categories"
+                                    value="{{ category }}">{{ category }}</option>
+                            </select>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+
+    </div>
+
+
+
+
+    <nav class=" text-center">
+        <ul class="pagination">
+            <button aria-label="Previous" ng-click="home.setPage(home.currentPage-1)">
+                <span aria-hidden="true" >&laquo;</span>
+            </button>
+
+            <li ng-repeat="page in home.getPages()">
+                <button class="btn btn-default" ng-class="{'active': home.currentPage===page}" ng-click="home.setPage(page)">{{ page }}</button>
+            </li>
+
+            <button aria-label="Next" ng-click="home.setPage(home.currentPage+1)">
+                <span aria-hidden="true">&raquo;</span>
+            </button>
+
+        </ul>
+
+    </nav>
+    <nav class="text-center">
+        <div>
+            items per page:
+
+        </div>
+        <ul class="pagination">
+
+
+            <button aria-label="set20" ng-click="home.setItemsPerPage(20)">
+                <span aria-hidden="true">20</span>
+            </button>
+            <button aria-label="set50" ng-click="home.setItemsPerPage(50)">
+                <span aria-hidden="true">50</span>
+            </button>
+            <button aria-label="set100" ng-click="home.setItemsPerPage(100)">
+                <span aria-hidden="true">100</span>
+            </button>
+
+        </ul>
+    </nav>
+</div>
+
+<hr/>
+
+
